@@ -48,10 +48,7 @@ fun quadraticRootProduct(a: Double, b: Double, c: Double): Double {
 /**
  * Пример главной функции
  */
-fun main() {
-    val x1x2 = quadraticRootProduct(1.0, 13.0, 42.0)
-    println("Root product: $x1x2")
-}
+
 
 /**
  * Тривиальная
@@ -118,4 +115,19 @@ fun accountInThreeYears(initial: Int, percent: Int): Double = TODO()
  * Пользователь задает целое трехзначное число (например, 478).
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
-fun numberRevert(number: Int): Int = TODO()
+fun numberRevert(number: Int): Int {
+    var num = number
+    var newNumber = 0
+    var multiplier = 100
+    while (num >= 1) {
+        println((num % 10))
+        newNumber += (num % 10) * multiplier
+        multiplier /= 10
+        num /= 10
+    }
+    return newNumber
+}
+
+fun main() {
+    println(numberRevert(123))
+}

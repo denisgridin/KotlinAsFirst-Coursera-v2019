@@ -245,4 +245,69 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun main () {
+    println(russian(314))
+}
+fun russian(n: Int): String {
+    val simple: List<String> = listOf("", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
+    val decimals: List<String> = listOf(
+        "десять",
+        "одиннадцать",
+        "двенадцать",
+        "тринадцать",
+        "четырнадцать",
+        "пятнадцать",
+        "шестнадцать",
+        "семнадцать",
+        "восемнадцать",
+        "девятнадцать"
+    )
+    val decimalsSimple: List<String> = listOf(
+        "",
+        "десять",
+        "двадцать",
+        "тридцать",
+        "сорок",
+        "пятьдесят",
+        "шестьдесят",
+        "семьдесят",
+        "восемьдесят",
+        "девяносто"
+    )
+    val hundreds: List<String> = listOf(
+        "",
+        "сто",
+        "двести",
+        "триста",
+        "четыреста",
+        "пятьсот",
+        "шестьсот",
+        "семьсот",
+        "восемьсот",
+        "девятьсот"
+    )
+
+    val numbers: List<List<String>> = listOf(simple, decimalsSimple, hundreds)
+    val number = n.toString()
+    var position = 0
+    var result: ArrayList<String> = arrayListOf()
+
+    for (i in number.length - 1 downTo 0 step 1) {
+        val index = number[i].toInt() - 48
+        if (i === 1) {
+            if ((index * 10 + number[number.length - 1].toInt() - 48) > 10 && (index * 10 + number[number.length - 1].toInt() - 48) < 20) {
+                val units = number[number.length - 1].toInt() - 48
+                result.clear()
+                result.add(decimals[units])
+                position += 1
+            } else {
+                result.add("${numbers[position][index]}")
+                position += 1
+            }
+        } else {
+            result.add("${numbers[position][index]}")
+            position += 1
+        }
+    }
+    return result.asReversed().joinToString(separator = " ")
+}
